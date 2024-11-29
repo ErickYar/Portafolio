@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Portafolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+        }
+
+        .header {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .projects-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .project-info {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.25rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-description {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .technologies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tech-tag {
+            background: #e1f5fe;
+            color: #0288d1;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.875rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-links a {
+            text-decoration: none;
+            color: #2196f3;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-links a:hover {
+            color: #1976d2;
+        }
+
+        @media (max-width: 768px) {
+            .projects-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Mi Portafolio</h1>
+        <p>Desarrollador Web Full Stack</p>
+    </header>
+
+    <div id="projects-container" class="projects-container">
+        <!-- Los proyectos se cargarán aquí dinámicamente -->
+    </div>
+
+    <script>
+        // Datos de los proyectos
+        const projects = [
+            {
+                id: 1,
+                title: "E-commerce Moderno",
+                description: "Tienda en línea responsive con carrito de compras y panel de administración.",
+                image: "https://via.placeholder.com/400x200",
+                technologies: ["HTML", "CSS", "JavaScript", "Node.js"],
+                liveUrl: "#",
+                githubUrl: "#"
+            },
+            {
+                id: 2,
+                title: "Dashboard Analytics",
+                description: "Panel de control para visualización de datos empresariales en tiempo real.",
+                image: "https://via.placeholder.com/400x200",
+                technologies: ["JavaScript", "Express", "Chart.js"],
+                liveUrl: "#",
+                githubUrl: "#"
+            },
+            {
+                id: 3,
+                title: "App de Gestión de Tareas",
+                description: "Aplicación para gestión de proyectos y tareas colaborativas.",
+                image: "https://via.placeholder.com/400x200",
+                technologies: ["HTML", "CSS", "JavaScript", "Firebase"],
+                liveUrl: "#",
+                githubUrl: "#"
+            }
+        ];
+
+        // Función para crear las tarjetas de proyectos
+        function createProjectCard(project) {
+            return `
+                <div class="project-card">
+                    <img src="${project.image}" alt="${project.title}" class="project-image">
+                    <div class="project-info">
+                        <h3 class="project-title">${project.title}</h3>
+                        <p class="project-description">${project.description}</p>
+                        <div class="technologies">
+                            ${project.technologies.map(tech => `
+                                <span class="tech-tag">${tech}</span>
+                            `).join('')}
+                        </div>
+                        <div class="project-links">
+                            <a href="${project.liveUrl}" target="_blank">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                Demo en vivo
+                            </a>
+                            <a href="${project.githubUrl}" target="_blank">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                                </svg>
+                                Código
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Función para cargar los proyectos
+        function loadProjects() {
+            const container = document.getElementById('projects-container');
+            const projectsHTML = projects.map(project => createProjectCard(project)).join('');
+            container.innerHTML = projectsHTML;
+        }
+
+        // Cargar los proyectos cuando la página esté lista
+        document.addEventListener('DOMContentLoaded', loadProjects);
+    </script>
+</body>
+</html>
